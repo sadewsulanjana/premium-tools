@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Normal Calculator</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Normal Calculator</h1>
+    <a href="index.html" style="color:var(--text-muted); font-size:0.9rem;">◀ Back</a>
+  </header>
+
+  <section class="panel">
+    <div class="display" id="display">0</div>
+    <div class="keys">
+      <button class="btn" data-action="clear">AC</button>
+      <button class="btn" data-action="back">⌫</button>
+      <button class="btn operator" data-value="/">÷</button>
+      <button class="btn operator" data-value="*">×</button>
+
+      <button class="btn" data-value="7">7</button>
+      <button class="btn" data-value="8">8</button>
+      <button class="btn" data-value="9">9</button>
+      <button class="btn operator" data-value="-">−</button>
+
+      <button class="btn" data-value="4">4</button>
+      <button class="btn" data-value="5">5</button>
+      <button class="btn" data-value="6">6</button>
+      <button class="btn operator" data-value="+">+</button>
+
+      <button class="btn" data-value="1">1</button>
+      <button class="btn" data-value="2">2</button>
+      <button class="btn" data-value="3">3</button>
+      <button class="btn operator" data-action="equals">=</button>
+
+      <button class="btn wide" data-value="0">0</button>
+      <button class="btn" data-value=".">.</button>
+    </div>
+  </section>
+
+  <footer>© 2026 Premium Gold Tools</footer>
+</div>
+
+<script>
+const display = document.getElementById('display');
+let expression = '';
+
+function render(){ display.textContent = expression || '0'; }
+function append(val){ expression += val; render(); }
+function clearDisplay(){ expression=''; render(); }
+function back(){ expression = expression.slice(0,-1); render(); }
+function calculate(){
+  try{
+    expression = Function('"use strict";return ('+expression+')')();
+  }catch{ expression='Error'; }
+  render();
+}
+
+document.querySelectorAll('.btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    if(btn.dataset.value) append(btn.dataset.value);
+    else if(btn.dataset.action==='clear') clearDisplay();
+    else if(btn.dataset.action==='back') back();
+    else if(btn.dataset.action==='equals') calculate();
+  });
+});
+
+window.addEventListener('keydown', e=>{
+  if('0123456789+-*/().'.includes(e.key)) append(e.key);
+  else if(e.key==='Enter') calculate();
+  else if(e.key==='Backspace') back();
+  else if(e.key==='Escape') clearDisplay();
+});
+</script>
+</body>
+</html>

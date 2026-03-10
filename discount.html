@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discount Calculator</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Discount Calculator</h1>
+    <a href="index.html" style="color:var(--text-muted); font-size:0.9rem;">◀ Back</a>
+  </header>
+
+  <section class="panel">
+    <div class="form-row">
+      <input type="number" id="original" placeholder="Original Price">
+      <input type="number" id="discount" placeholder="Discount %">
+      <input type="number" id="qty" placeholder="Quantity" value="1">
+      <button id="calcBtn" class="btn operator">Calculate</button>
+    </div>
+
+    <div class="result">
+      <div>Price each: <span class="kv" id="each">$0.00</span></div>
+      <div>Total: <span class="kv" id="total">$0.00</span></div>
+    </div>
+  </section>
+
+  <footer>© 2026 Premium Gold Tools</footer>
+</div>
+
+<script>
+function fmt(n){ return '$'+n.toFixed(2); }
+function recalc(){
+  const o=parseFloat(document.getElementById('original').value)||0;
+  const d=parseFloat(document.getElementById('discount').value)||0;
+  const q=parseInt(document.getElementById('qty').value)||1;
+  const each = o*(1-d/100);
+  document.getElementById('each').textContent = fmt(each);
+  document.getElementById('total').textContent = fmt(each*q);
+}
+document.getElementById('calcBtn').addEventListener('click', recalc);
+</script>
+</body>
+</html>

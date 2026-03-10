@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salary Calculator</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Salary Calculator</h1>
+    <a href="index.html" style="color:var(--text-muted); font-size:0.9rem;">◀ Back</a>
+  </header>
+
+  <section class="panel">
+    <div class="form-row">
+      <input type="number" id="rate" placeholder="Hourly Rate">
+      <input type="number" id="hours" placeholder="Hours per Week" value="40">
+      <input type="number" id="weeks" placeholder="Weeks per Year" value="52">
+      <button id="calcBtn" class="btn operator">Calculate</button>
+    </div>
+
+    <div class="result">
+      <div>Weekly: <span class="kv" id="weekly">$0.00</span></div>
+      <div>Monthly: <span class="kv" id="monthly">$0.00</span></div>
+      <div>Yearly: <span class="kv" id="yearly">$0.00</span></div>
+    </div>
+  </section>
+
+  <footer>© 2026 Premium Gold Tools</footer>
+</div>
+
+<script>
+function fmt(n){ return '$'+n.toFixed(2); }
+function recalc(){
+  const r=parseFloat(document.getElementById('rate').value)||0;
+  const h=parseFloat(document.getElementById('hours').value)||0;
+  const w=parseInt(document.getElementById('weeks').value)||52;
+  const weekly=r*h;
+  const yearly=weekly*w;
+  const monthly=yearly/12;
+  document.getElementById('weekly').textContent=fmt(weekly);
+  document.getElementById('monthly').textContent=fmt(monthly);
+  document.getElementById('yearly').textContent=fmt(yearly);
+}
+document.getElementById('calcBtn').addEventListener('click', recalc);
+</script>
+</body>
+</html>

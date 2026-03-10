@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premium Gold Tools</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>✨ Premium Gold Tools ✨</h1>
+    <p>All calculators in a sleek glass-gold UI</p>
+  </header>
+
+  <section class="grid">
+    <a href="calculator.html" class="card">
+      <h2>Normal Calculator</h2>
+      <p>Fast, responsive, and keyboard-ready</p>
+    </a>
+
+    <a href="discount.html" class="card">
+      <h2>Discount Calculator</h2>
+      <p>Calculate price, savings, and totals easily</p>
+    </a>
+
+    <a href="salary.html" class="card">
+      <h2>Salary Calculator</h2>
+      <p>Compute weekly, monthly, yearly salary quickly</p>
+    </a>
+  </section>
+
+  <footer>
+    © 2026 Premium Gold Tools
+  </footer>
+</div>
+</body>
+</html><script>
+(function(){
+  const game = document.getElementById('game');
+  const car = document.getElementById('car');
+  const step = 10;
+  let pos = {x:90, y:90}; // start near center
+
+  function updatePosition(){
+    car.style.left = pos.x + 'px';
+    car.style.top = pos.y + 'px';
+  }
+
+  window.addEventListener('keydown', e=>{
+    const maxX = game.clientWidth - 20;
+    const maxY = game.clientHeight - 20;
+    if(e.key==='ArrowUp') pos.y = Math.max(0,pos.y-step);
+    else if(e.key==='ArrowDown') pos.y = Math.min(maxY,pos.y+step);
+    else if(e.key==='ArrowLeft') pos.x = Math.max(0,pos.x-step);
+    else if(e.key==='ArrowRight') pos.x = Math.min(maxX,pos.x+step);
+    updatePosition();
+  });
+
+  updatePosition();
+})();
+</script>
